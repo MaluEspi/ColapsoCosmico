@@ -20,7 +20,7 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // Cursor.lockState = CursorLockMode.Locked;
+       //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -51,4 +51,6 @@ public class CameraMove : MonoBehaviour
     {
         canMouseMove = value;
     }
+    /* ao inves de mexer nesse script, acho que dava para colocar essa funcao no script do objeto, que quando ele entra em contato o script da camera
+     * é desativado e a camera trava em uma posicao especifica, pq dai vc consegue mexer no mouse e a camera ta travado onde tu quer acho que fica melhro a interacao e nao da bug*/
 }
