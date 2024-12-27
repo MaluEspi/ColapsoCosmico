@@ -15,6 +15,8 @@ public class CameraMove : MonoBehaviour
     float mouseX;
     float mouseY;
 
+    bool canMouseMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,22 +26,29 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        mouseX = lookInput.x * sensitivity * Time.deltaTime;
-        mouseY = lookInput.y * sensitivity * Time.deltaTime;
+        if (canMouseMove)
+        {
+            mouseX = lookInput.x * sensitivity * Time.deltaTime;
+            mouseY = lookInput.y * sensitivity * Time.deltaTime;
 
-        xRotate -= mouseY;
-        xRotate = Mathf.Clamp(xRotate, -80f, 80f);
+            xRotate -= mouseY;
+            xRotate = Mathf.Clamp(xRotate, -80f, 80f);
 
 
-        cameraMove.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
-       
-        transform.Rotate(Vector3.up * mouseX);
+            cameraMove.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
+
+            transform.Rotate(Vector3.up * mouseX);
+
+        }
     }
-
     
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
+    }
+
+    public void CancelCamera(bool value)
+    {
+        canMouseMove = value;
     }
 }
