@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator anim;
 
-    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +37,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3 move = transform.right * movementInput.x + transform.forward * movementInput.y;
-        if (canMove)
-        {
+       
             controller.Move(move * speed * Time.deltaTime);
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
-        }
+        
        
     }
 
@@ -52,10 +50,6 @@ public class PlayerMovement : MonoBehaviour
         movementInput = value.Get<Vector2>();
     }
 
-    // isso aqui e para "travar" a movimentacao do player enquanto eu estiver mexendo com os paineis de energia
-    public void CancelMove(bool value)
-    {
-        canMove = value;
-    }
+    
 
 }
