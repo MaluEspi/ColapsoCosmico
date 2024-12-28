@@ -53,4 +53,5 @@ public class CameraMove : MonoBehaviour
     }
     /* ao inves de mexer nesse script, acho que dava para colocar essa funcao no script do objeto, que quando ele entra em contato o script da camera
      * é desativado e a camera trava em uma posicao especifica, pq dai vc consegue mexer no mouse e a camera ta travado onde tu quer acho que fica melhro a interacao e nao da bug*/
+    // te falar q oq ta dando mais problema e a animaçao de idle do player pq ai ele nao fica 100% parado=, vou ver o eu faco
 }
