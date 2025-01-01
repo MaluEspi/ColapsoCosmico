@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Teste : MonoBehaviour
+public class PlayerMovementWZeroGravity : MonoBehaviour
 {
     public float speed = 6.0f;
     public float gravity = -9.81f;
-    public float zeroGravityForce = 0.2f; // Força de flutuação na gravidade zero
 
+    public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
+    public float downwardSpeed = 5f;
+ 
     private Vector2 movementInput;
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
-    private bool isInZeroGravityZone = false; // Para controlar a zona de gravidade zero
-     private Animator anim;
+    public bool isInZeroGravityZone = false; // Para controlar a zona de gravidade zero
+    private Animator anim;
 
     void Start()
     {
@@ -32,8 +34,15 @@ public class Teste : MonoBehaviour
         // Se o jogador estiver na zona de gravidade zero
         if (isInZeroGravityZone)
         {
+            speed = 3f;
             // Aplica a força de flutuação
-            velocity.y = zeroGravityForce; // Ajuste a força conforme necessário
+            velocity.y = zeroGravityForce;
+            if (Keyboard.current.qKey.isPressed)
+            {
+                // Move o jogador para baixo
+                velocity.y -= downwardSpeed * Time.deltaTime;
+                Debug.Log("LETRA Q PRESSIONADA");
+            }
         }
         else
         {
@@ -42,7 +51,7 @@ public class Teste : MonoBehaviour
             {
                 velocity.y = -2f;
             }
-            velocity.y += gravity * Time.deltaTime; // Aplica a gravidade
+            velocity.y += gravity * Time.deltaTime; 
         }
 
         // Movimento do jogador
@@ -62,7 +71,7 @@ public class Teste : MonoBehaviour
         if (other.CompareTag("Sala"))
         {
             isInZeroGravityZone = true; // Ativa a gravidade zero
-            Debug.Log("Entrou na zona de gravidade zero"); // Mensagem de depuração
+            Debug.Log("Entrou na zona de gravidade zero"); 
         }
     }
 
@@ -71,8 +80,13 @@ public class Teste : MonoBehaviour
         // Verifica se o objeto que saiu do trigger é o jogador
         if (other.CompareTag("Sala"))
         {
-           // isInZeroGravityZone = false; // Desativa a gravidade zero
-            Debug.Log("Saiu da zona de gravidade zero"); // Mensagem de depuração
+            Debug.Log("Saiu da zona de gravidade zero");
         }
+    }
+
+    public void CancelZeroGravity()
+    {       
+        isInZeroGravityZone = false; // Desativa a gravidade zero
+        Debug.Log("Gravidade zero cancelada ao clicar no botao"); 
     }
 }
