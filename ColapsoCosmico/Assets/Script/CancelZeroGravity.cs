@@ -6,6 +6,10 @@ public class CancelZeroGravity : MonoBehaviour
 {
     public LayerMask interactableLayer;
     public GameObject buttonOff;
+    public GameObject doorOne;
+    public GameObject doorTwo;
+    public GameObject downwardBar;
+    public GameObject zeroGravityFloor;
 
     // Update is called once per frame
     void Update()
@@ -35,6 +39,10 @@ public class CancelZeroGravity : MonoBehaviour
                   //  Debug.Log("Gravidade zero cancelada ao clicar no objeto: " + hit.collider.name); // Mensagem de depuração
 
                     buttonOff.SetActive(true);
+                    doorOne.SetActive(false);
+                    doorTwo.SetActive(false);
+                    downwardBar.SetActive(false);
+                    zeroGravityFloor.SetActive(false);
                     DesableFloatingBox();
                 }
             }

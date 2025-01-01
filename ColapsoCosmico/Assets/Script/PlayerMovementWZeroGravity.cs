@@ -10,7 +10,9 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
 
     public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
     public float downwardSpeed = 5f;
- 
+    public ProgressBar barraDeProgresso; // Referência à barra de progresso
+    public GameObject downwardBar;
+
     private Vector2 movementInput;
     private CharacterController controller;
     private Vector3 velocity;
@@ -32,16 +34,17 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         isGrounded = controller.isGrounded;
 
         // Se o jogador estiver na zona de gravidade zero
-        if (isInZeroGravityZone)
+        if (isInZeroGravityZone )
         {
-            speed = 3f;
+            speed = 1f;
             // Aplica a força de flutuação
             velocity.y = zeroGravityForce;
-            if (Keyboard.current.qKey.isPressed)
+            if (Keyboard.current.qKey.isPressed && barraDeProgresso.barraProgresso.rectTransform.sizeDelta.x > 0)
             {
                 // Move o jogador para baixo
                 velocity.y -= downwardSpeed * Time.deltaTime;
-                Debug.Log("LETRA Q PRESSIONADA");
+                barraDeProgresso.DiminuirBarra(barraDeProgresso.larguraOriginal * 0.01f); // Diminui 10% da barra
+                StartCoroutine(ReiniciarBarra());
             }
         }
         else
@@ -51,7 +54,7 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
             {
                 velocity.y = -2f;
             }
-            velocity.y += gravity * Time.deltaTime; 
+            velocity.y += gravity * Time.deltaTime;
         }
 
         // Movimento do jogador
@@ -70,23 +73,17 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         // Verifica se o objeto que entrou no trigger é o jogador
         if (other.CompareTag("Sala"))
         {
+            downwardBar.SetActive(true);
             isInZeroGravityZone = true; // Ativa a gravidade zero
-            Debug.Log("Entrou na zona de gravidade zero"); 
+            Debug.Log("Entrou na zona de gravidade zero");
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator ReiniciarBarra()
     {
-        // Verifica se o objeto que saiu do trigger é o jogador
-        if (other.CompareTag("Sala"))
-        {
-            Debug.Log("Saiu da zona de gravidade zero");
-        }
+
+        yield return new WaitForSeconds(8f);
+        barraDeProgresso.ReiniciarBarra();
     }
 
-    public void CancelZeroGravity()
-    {       
-        isInZeroGravityZone = false; // Desativa a gravidade zero
-        Debug.Log("Gravidade zero cancelada ao clicar no botao"); 
-    }
 }
