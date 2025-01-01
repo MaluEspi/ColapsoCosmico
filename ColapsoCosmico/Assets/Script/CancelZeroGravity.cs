@@ -5,6 +5,7 @@ using UnityEngine;
 public class CancelZeroGravity : MonoBehaviour
 {
     public LayerMask interactableLayer;
+    public GameObject buttonOff;
 
     // Update is called once per frame
     void Update()
@@ -31,9 +32,25 @@ public class CancelZeroGravity : MonoBehaviour
                 if (playerMovement != null)
                 {
                     playerMovement.isInZeroGravityZone = false; // Desativa a gravidade zero
-                    Debug.Log("Gravidade zero cancelada ao clicar no objeto: " + hit.collider.name); // Mensagem de depuração
+                  //  Debug.Log("Gravidade zero cancelada ao clicar no objeto: " + hit.collider.name); // Mensagem de depuração
+
+                    buttonOff.SetActive(true);
+                    DesableFloatingBox();
                 }
             }
         }
+    }
+
+    private void DesableFloatingBox()
+    {
+        Box[] allMyBoxes = FindObjectsOfType<Box>();
+
+        // Desativa cada um dos scripts encontrados
+        foreach (Box script in allMyBoxes)
+        {
+            script.enabled = false; // Desativa o script
+            Debug.Log("Desativado: " + script.gameObject.name); // Mensagem de depuração
+        }
+
     }
 }
