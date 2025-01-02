@@ -16,4 +16,18 @@ public class Laser : MonoBehaviour
     {
         transform.position += Vector3.forward * speed * Time.deltaTime;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Asteroid")) 
+        {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.AddScore(1); 
+            }
+
+            Destroy(other.gameObject); 
+            Destroy(gameObject); 
+        }
+    }
 }

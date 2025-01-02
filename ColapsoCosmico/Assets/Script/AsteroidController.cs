@@ -51,11 +51,22 @@ public class AsteroidController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Laser")) 
+      
+        if (other.CompareTag("Spaceship"))
         {
-            
-            Destroy(other.gameObject); 
-            Destroy(gameObject);       
+            // Reduz a vida do player
+            HealthManager healthManager = other.GetComponent<HealthManager>();
+            if (healthManager != null)
+            {
+                healthManager.TakeDamage(1); // Dano de 1 vida
+            }
+
+            Destroy(gameObject); // Destroi o meteoro
+        }
+        else if (other.CompareTag("Laser"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
