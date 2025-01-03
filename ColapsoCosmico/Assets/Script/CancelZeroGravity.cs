@@ -37,7 +37,7 @@ public class CancelZeroGravity : MonoBehaviour
             // Verifica se o objeto atingido tem a tag "Interactable"
             if (hit.collider.CompareTag("Interactable"))
             {
-                Debug.Log("Objeto interativo encontrado: " + hit.collider.name);
+             
                 // Obtém o script PlayerMovement do jogador
                 PlayerMovementWZeroGravity playerMovement = FindObjectOfType<PlayerMovementWZeroGravity>();
                 if (playerMovement != null)

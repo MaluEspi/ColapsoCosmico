@@ -11,7 +11,12 @@ public class TemperatureTaskController : MonoBehaviour
 
     public Text itemText;
     public Text itemCount;
+
     public GameObject valveCount;
+    public GameObject cabinetTemp;
+    public GameObject lightTemp;
+
+    private int removedItensCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -74,19 +79,23 @@ public class TemperatureTaskController : MonoBehaviour
 
     void RemoveItemFromInventory(RaycastHit hit)
     {
-        string objectName = hit.transform.GetComponent<ObjectType>().objectType.name;
-
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] != null  && slotAmount[i] > 0)
             {
                 slotAmount[i]--;
+                removedItensCount++;
                 if (slotAmount[i] == 0)
-                {
-                    
+                {                   
                     // Se a quantidade for zero, limpa o slot
-                    slots[i] = null;
-                    slotsImage[i].sprite = null; // Limpa a imagem do slot
+                    slots[i] = null;                 
+                }
+
+                if(removedItensCount >= 4)
+                {
+                    valveCount.SetActive(false); // desativa a imagem
+                    lightTemp.SetActive(false); // desliga as luzes das salas
+                    cabinetTemp.SetActive(true); // muda o sprite da camara
                 }
                 break; // Sai do loop após remover um item
             }
