@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CancelZeroGravity : MonoBehaviour
 {
@@ -11,11 +12,15 @@ public class CancelZeroGravity : MonoBehaviour
     public GameObject downwardBar;
     public GameObject zeroGravityFloor;
 
-    // Update is called once per frame
+
+    void Start()
+    {
+        // Inicialização, se necessário
+    }
+
     void Update()
     {
-        
-        if (Input.GetMouseButtonDown(0)) // 0 é o botão esquerdo do mouse
+        if (Input.GetKeyDown(KeyCode.E))
         {
             CancelGravityZero();
         }
@@ -23,20 +28,21 @@ public class CancelZeroGravity : MonoBehaviour
 
     private void CancelGravityZero()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
 
         if (Physics.Raycast(ray, out hit, 100f, interactableLayer))
         {
+            Debug.Log("Raycast funcionou, atingiu: " + hit.collider.name);
             // Verifica se o objeto atingido tem a tag "Interactable"
             if (hit.collider.CompareTag("Interactable"))
             {
+                Debug.Log("Objeto interativo encontrado: " + hit.collider.name);
                 // Obtém o script PlayerMovement do jogador
                 PlayerMovementWZeroGravity playerMovement = FindObjectOfType<PlayerMovementWZeroGravity>();
                 if (playerMovement != null)
                 {
                     playerMovement.isInZeroGravityZone = false; // Desativa a gravidade zero
-                  //  Debug.Log("Gravidade zero cancelada ao clicar no objeto: " + hit.collider.name); // Mensagem de depuração
 
                     buttonOff.SetActive(true);
                     doorOne.SetActive(false);
@@ -45,8 +51,11 @@ public class CancelZeroGravity : MonoBehaviour
                     zeroGravityFloor.SetActive(false);
                     DesableFloatingBox();
                 }
+               
             }
+           
         }
+       
     }
 
     private void DesableFloatingBox()
@@ -59,6 +68,5 @@ public class CancelZeroGravity : MonoBehaviour
             script.enabled = false; // Desativa o script
             Debug.Log("Desativado: " + script.gameObject.name); // Mensagem de depuração
         }
-
     }
 }

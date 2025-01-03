@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementWZeroGravity : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public float speed = 4.0f;
     public float gravity = -9.81f;
 
     public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
@@ -52,6 +52,7 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
             // Lógica normal de gravidade
             if (isGrounded && velocity.y < 0)
             {
+                speed = 4f;
                 velocity.y = -2f;
             }
             velocity.y += gravity * Time.deltaTime;
