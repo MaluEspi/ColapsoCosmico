@@ -11,6 +11,7 @@ public class TemperatureTaskController : MonoBehaviour
 
     public Text itemText;
     public Text itemCount;
+    public GameObject valveCount;
 
 
     // Start is called before the first frame update
@@ -56,7 +57,15 @@ public class TemperatureTaskController : MonoBehaviour
             {
                 itemText.text = null;
             }
-        }
+            if (hit.collider.tag == "Camaras")
+            {
+                itemText.text = "Press (E) to put the  object " + hit.transform.GetComponent<ObjectType>().objectType.name;
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+
+                }
+                }
+            }
         // Atualiza o texto de contagem de itens
         UpdateItemCountText();
     }
@@ -68,7 +77,8 @@ public class TemperatureTaskController : MonoBehaviour
         {
             if (slots[i] != null)
             {
-                itemCount.text +=  ": " + slotAmount[i] + "\n"; // Adiciona a contagem de cada item
+                valveCount.SetActive(true);
+                itemCount.text += slots[i].name + ":" + slotAmount[i]  + "/2 "; // Adiciona a contagem de cada item
             }
         }
 
