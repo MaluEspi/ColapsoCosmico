@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TemperatureTaskManager : MonoBehaviour
 {
+    public GameObject tempBar;
     public Image healthBar;
     public float health;
     public float maxHealth;
@@ -19,8 +20,9 @@ public class TemperatureTaskManager : MonoBehaviour
     {
         if( other.CompareTag("Temp"))
         {
+            tempBar.SetActive(true);
             health -= attackCost;
-            if (health < 0 )
+            if (health == 0 )
             {
                 Debug.Log("Respawn");
                 health = 0;
@@ -35,7 +37,7 @@ public class TemperatureTaskManager : MonoBehaviour
         recharge = StartCoroutine(RechargeHealth());
        
     }
-
+   
     private IEnumerator RechargeHealth()
     {
         yield return new WaitForSeconds(1f);

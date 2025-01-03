@@ -17,6 +17,7 @@ public class TemperatureTaskController : MonoBehaviour
     public GameObject lightTemp;
 
     private int removedItensCount = 0;
+    public GameObject tempBar;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class TemperatureTaskController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Camaras"))
             {
-               
+                itemText.text = "Press (E) to put the objects " ;
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                   
@@ -96,6 +97,7 @@ public class TemperatureTaskController : MonoBehaviour
                     valveCount.SetActive(false); // desativa a imagem
                     lightTemp.SetActive(false); // desliga as luzes das salas
                     cabinetTemp.SetActive(true); // muda o sprite da camara
+                    tempBar.SetActive(false); // desativa a barra de vida
                 }
                 break; // Sai do loop após remover um item
             }
