@@ -2423,7 +2423,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.04
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -4919,7 +4919,7 @@ MonoBehaviour:
   targetScore: 6
   player: {fileID: 691620751}
   meteor: {fileID: 1471973234}
-  critical: {fileID: 0}
+  critical: {fileID: 573754105}
   scoreText: {fileID: 651163356}
 --- !u!1 &1413601525
 GameObject:
