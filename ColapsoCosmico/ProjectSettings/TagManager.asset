@@ -9,6 +9,13 @@ TagManager:
   - Sala
   - Camaras
   - Temp
+  - Asteroid
+  - Laser
+  - Spaceship
+  - Item
+  - Oxygen
+  - Plutonium
+  - Remedy
   layers:
   - Default
   - TransparentFX
