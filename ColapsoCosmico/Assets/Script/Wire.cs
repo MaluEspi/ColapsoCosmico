@@ -16,9 +16,8 @@ public class Wire : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0)) // 0 é o botão esquerdo do mouse
-        {
-            playerController.CutWire(wireIndex); // Chama o método CutWire no PlayerController
-        }
+        Debug.Log("Fio clicado: " + wireIndex);
+        playerController.CutWire(wireIndex); // Chama o método CutWire no PlayerController
+        
     }
 }
