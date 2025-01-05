@@ -135,9 +135,13 @@ public class TemperatureTaskController : MonoBehaviour
         {
             tempBar.SetActive(true);
             health -= attackCost;
-            if (health == 0)
+            if (health < 0)
             {
                 health = 0;
+                
+            }
+            if(health == 0)
+            {
                 Respawn();
             }
             healthBar.fillAmount = health / maxHealth;
@@ -168,7 +172,6 @@ public class TemperatureTaskController : MonoBehaviour
     }
     private void Respawn()
     {
-        Debug.Log("respawn");
         transform.position = respawn; // Reinicia a posição do jogador
         health = maxHealth; // Restaura a vida
 
