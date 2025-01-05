@@ -137,7 +137,6 @@ public class TemperatureTaskController : MonoBehaviour
             health -= attackCost;
             if (health == 0)
             {
-                Debug.Log("Respawn");
                 health = 0;
                 Respawn();
             }
