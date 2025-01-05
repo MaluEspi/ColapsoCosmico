@@ -12,7 +12,7 @@ public class CancelZeroGravity : MonoBehaviour
     public GameObject downwardBar;
     public GameObject zeroGravityFloor;
 
-
+    public GameObject finishedTask;
     void Start()
     {
         // Inicialização, se necessário
@@ -37,7 +37,7 @@ public class CancelZeroGravity : MonoBehaviour
             // Verifica se o objeto atingido tem a tag "Interactable"
             if (hit.collider.CompareTag("Interactable"))
             {
-             
+
                 // Obtém o script PlayerMovement do jogador
                 PlayerMovementWZeroGravity playerMovement = FindObjectOfType<PlayerMovementWZeroGravity>();
                 if (playerMovement != null)
@@ -50,8 +50,10 @@ public class CancelZeroGravity : MonoBehaviour
                     downwardBar.SetActive(false);
                     zeroGravityFloor.SetActive(false);
                     DesableFloatingBox();
+
+                    finishedTask.SetActive(false);
                 }
-               
+            
             }
            
         }

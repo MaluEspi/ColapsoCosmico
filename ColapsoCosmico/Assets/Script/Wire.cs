@@ -5,13 +5,13 @@ using UnityEngine;
 public class Wire : MonoBehaviour
 {
     public int wireIndex; // Índice do fio
-    private EnergyTaskController playerController;
+    private TaskControllerEnergy playerController;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
-        playerController = FindObjectOfType<EnergyTaskController>(); // Encontra o PlayerController na cena
-        OnMouseDown();
+        playerController = FindObjectOfType<TaskControllerEnergy>(); // Encontra o PlayerController na cena
+ 
     }
 
     void OnMouseDown()

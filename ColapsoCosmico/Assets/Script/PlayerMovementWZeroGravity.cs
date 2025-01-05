@@ -20,6 +20,7 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     public bool isInZeroGravityZone = false; // Para controlar a zona de gravidade zero
     private Animator anim;
 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();

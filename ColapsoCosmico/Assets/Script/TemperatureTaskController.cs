@@ -28,6 +28,8 @@ public class TemperatureTaskController : MonoBehaviour
     public Vector3 respawn;
 
     private Coroutine recharge;
+
+    public GameObject finishedTask;
     // Start is called before the first frame update
     void Start()
     {
@@ -107,6 +109,8 @@ public class TemperatureTaskController : MonoBehaviour
                     lightTemp.SetActive(false); // desliga as luzes das salas
                     cabinetTemp.SetActive(true); // muda o sprite da camara
                     tempBar.SetActive(false); // desativa a barra de vida
+
+                    finishedTask.SetActive(true);
                 }
                 break; // Sai do loop após remover um item
             }
