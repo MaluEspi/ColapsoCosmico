@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class Wire : MonoBehaviour
 {
-    Vector3 startPoint;
-    public SpriteRenderer wireEnd;
-    // Start is called before the first frame update
+    public int wireIndex; // Índice do fio
+    private EnergyTaskController playerController;
+
     void Start()
     {
-        startPoint = transform.parent.position;
+        Cursor.lockState = CursorLockMode.None;
+        playerController = FindObjectOfType<EnergyTaskController>(); // Encontra o PlayerController na cena
+        OnMouseDown();
     }
 
-  private void OnMouseDrag()
-   {
-        // mouse positon to world point
-        Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPosition.z = 0;
-       // update wire position
-        transform.position = newPosition;
-        //update direction 
-        Vector3 direction = newPosition - startPoint;
-        transform.right = direction * transform.lossyScale.x;
-        // update scale
-        float dist = Vector2.Distance(startPoint, newPosition);
-        wireEnd.size = new Vector2(dist, wireEnd.size.y);
+    void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0)) // 0 é o botão esquerdo do mouse
+        {
+            playerController.CutWire(wireIndex); // Chama o método CutWire no PlayerController
+        }
     }
-    
 }

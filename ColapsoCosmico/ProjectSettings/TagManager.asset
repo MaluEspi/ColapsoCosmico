@@ -16,6 +16,7 @@ TagManager:
   - Oxygen
   - Plutonium
   - Remedy
+  - Objects
   layers:
   - Default
   - TransparentFX
