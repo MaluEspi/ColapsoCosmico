@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementWZeroGravity : MonoBehaviour
@@ -10,8 +11,17 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
 
     public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
     public float downwardSpeed = 5f;
-    public ProgressBar barraDeProgresso; // Referência à barra de progresso
+
+    
+    public Image downwardhBar;
+    public float downward;
+    public float maxDownward;
+    
     public GameObject downwardBar;
+    public float attackCost;
+    public float chargeRate;
+   
+    private Coroutine recharge;
 
     private Vector2 movementInput;
     private CharacterController controller;
@@ -40,13 +50,27 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
             speed = 1f;
             // Aplica a força de flutuação
             velocity.y = zeroGravityForce;
-            if (Keyboard.current.qKey.isPressed && barraDeProgresso.barraProgresso.rectTransform.sizeDelta.x > 0)
+            if (Keyboard.current.qKey.isPressed && downwardhBar.fillAmount > 0)
             {
                 // Move o jogador para baixo
                 velocity.y -= downwardSpeed * Time.deltaTime;
-                barraDeProgresso.DiminuirBarra(barraDeProgresso.larguraOriginal * 0.01f); // Diminui 10% da barra
-                StartCoroutine(ReiniciarBarra());
+                downwardBar.SetActive(true);
+                downward -= attackCost;
+                if (downward == 0)
+                {
+                  
+                    downward = 0;
+                  
+                }
+                downwardhBar.fillAmount = downward / maxDownward;
             }
+            if (recharge != null)
+            {
+                StopCoroutine(recharge);
+            }
+            recharge = StartCoroutine(RechargeHealth());
+
+            
         }
         else
         {
@@ -81,11 +105,20 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         }
     }
 
-    private IEnumerator ReiniciarBarra()
+    private IEnumerator RechargeHealth()
     {
+        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(8f);
-        barraDeProgresso.ReiniciarBarra();
+        while (downward < maxDownward)
+        {
+            downward += chargeRate / 10f;
+            if (downward > maxDownward)
+            {
+                downward = maxDownward;
+            }
+        downwardhBar.fillAmount = downward / maxDownward;
+            yield return new WaitForSeconds(.1f);
+
+        }
     }
-
 }
