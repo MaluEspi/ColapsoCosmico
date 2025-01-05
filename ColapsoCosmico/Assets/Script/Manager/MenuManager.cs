@@ -8,10 +8,21 @@ public class MenuManager : MonoBehaviour
    [SerializeField] private string nomeDoLevelDeJogo;
    [SerializeField] private GameObject painelMenuInicial;
    [SerializeField] private GameObject paineiConfiguracoes;
-
-  public void Jogar()
+    FadeInOut fade;
+    private void Start()
     {
+        fade = FindObjectOfType<FadeInOut>();
+    }
+
+    public IEnumerator _Menu()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(nomeDoLevelDeJogo);
+    }
+    public void Jogar()
+    {
+        StartCoroutine(_Menu());
     }
 
     public void AbrirConfiguracoes()

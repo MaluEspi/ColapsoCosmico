@@ -3,7 +3,8 @@ using UnityEngine;
 public class OxygenSystemActivator : MonoBehaviour
 {
     public GameObject[] requiredItems; 
-    public GameObject systemFixedObject; 
+    public GameObject systemFixedObject;
+    public GameObject oxygenWin;
     public float interactionDistance = 3f;
 
     private bool allItemsDestroyed = false;
@@ -42,7 +43,8 @@ public class OxygenSystemActivator : MonoBehaviour
 
             if (hitObject == gameObject)
             {
-                systemFixedObject.SetActive(true); 
+                systemFixedObject.SetActive(true);
+                oxygenWin.SetActive(false);
             }
         }
     }
