@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6.0f;
     public float gravity = -9.81f;
 
-    public Transform pointA; // Posição final da câmera (ponto A)
-    public Transform pointB; // Posição inicial da câmera (ponto B)
+    public Transform pointA;
+    public Transform pointB; 
 
     private Vector2 movementInput;
     private CharacterController controller;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Camera playerCamera;
 
-    private bool isAnimating = true; // Flag para controlar a animação inicial
+    private bool isAnimating = true; 
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +27,10 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         playerCamera = Camera.main;
 
-        // Configurações iniciais
-        controller.enabled = false; // Desativa o CharacterController no início
-        playerCamera.transform.position = pointB.position; // Move a câmera para o ponto B
-        playerCamera.transform.rotation = pointB.rotation; // Ajusta a rotação da câmera
+        controller.enabled = false; 
+        playerCamera.transform.position = pointB.position; 
+        playerCamera.transform.rotation = pointB.rotation; 
 
-        // Inicia a contagem de tempo para a transição
         Invoke(nameof(EndAnimation), 7.37f);
     }
 
@@ -41,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAnimating) return;
 
-        // Configurações normais de movimento
         anim.SetFloat("vertical", Input.GetAxis("Vertical"));
         anim.SetFloat("horizontal", Input.GetAxis("Horizontal"));
 
@@ -64,13 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void EndAnimation()
     {
-        isAnimating = false; // Marca que a animação inicial terminou
+        isAnimating = false; 
 
-        // Move a câmera para o ponto A
         playerCamera.transform.position = pointA.position;
         playerCamera.transform.rotation = pointA.rotation;
 
-        // Ativa o CharacterController
         controller.enabled = true;
     }
 }

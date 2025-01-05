@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject meteor;
     public GameObject critical;
     public GameObject lifebar;
+    public GameObject meteorWin;
 
     public TMP_Text scoreText; 
 
@@ -46,6 +47,7 @@ public class ScoreManager : MonoBehaviour
         meteor.SetActive(false);
         critical.SetActive(false);
         lifebar.SetActive(false);
+        meteorWin.SetActive(false);
         // SceneManager.LoadScene("VictoryScene");
     }
 }

@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Necessário para carregar cenas
 
 public class OxygenManager : MonoBehaviour
 {
-    public Slider oxygenSlider; 
-    public float oxygenDuration = 120f; 
-    public GameObject systemFixedObject; 
-    public float interactionDistance = 2.5f; 
+    public Slider oxygenSlider;
+    public float oxygenDuration = 120f;
+    public GameObject systemFixedObject;
+    public float interactionDistance = 2.5f;
 
     private float currentOxygen;
-    private bool isPlutoniumActive = false; 
-    private bool isSystemFixed = false; 
-    private GameObject currentInteractable; 
+    private bool isPlutoniumActive = false;
+    private bool isSystemFixed = false;
+    private GameObject currentInteractable;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class OxygenManager : MonoBehaviour
         if (currentOxygen <= 0)
         {
             currentOxygen = 0;
+            GameOver(); // Chama o método para carregar a cena "GameOver"
         }
 
         oxygenSlider.value = currentOxygen;
@@ -38,7 +40,7 @@ public class OxygenManager : MonoBehaviour
         if (systemFixedObject.activeInHierarchy)
         {
             isSystemFixed = true;
-            oxygenSlider.gameObject.SetActive(false); 
+            oxygenSlider.gameObject.SetActive(false);
         }
 
         CheckInteraction();
@@ -81,6 +83,11 @@ public class OxygenManager : MonoBehaviour
             isPlutoniumActive = false;
         }
 
-        Destroy(interactable); 
+        Destroy(interactable);
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("GameOver"); // Carrega a cena "GameOver"
     }
 }

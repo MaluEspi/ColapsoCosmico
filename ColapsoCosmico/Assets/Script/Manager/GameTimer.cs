@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
@@ -43,8 +44,7 @@ public class GameTimer : MonoBehaviour
     void TriggerGameOver()
     {
         //isGameOver = true;
-        gameOverText.gameObject.SetActive(true);
-        gameOverText.text = "Game Over";
+        SceneManager.LoadScene("GamerOver");
         timerText.text = "00:00"; 
     }
 }
