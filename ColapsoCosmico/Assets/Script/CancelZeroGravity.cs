@@ -12,7 +12,6 @@ public class CancelZeroGravity : MonoBehaviour
     public GameObject downwardBar;
     public GameObject zeroGravityFloor;
 
-    public GameObject playerMain;
     public GameObject finishedTask;
     void Start()
     {
@@ -21,7 +20,7 @@ public class CancelZeroGravity : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             CancelGravityZero();
         }
@@ -53,8 +52,6 @@ public class CancelZeroGravity : MonoBehaviour
                     DesableFloatingBox();
 
                     finishedTask.SetActive(false);
-                    playerMain.GetComponent<PlayerMovementWZeroGravity>().enabled = false;
-                    playerMain.GetComponent<PlayerMovement>().enabled = true;
                 }
             
             }

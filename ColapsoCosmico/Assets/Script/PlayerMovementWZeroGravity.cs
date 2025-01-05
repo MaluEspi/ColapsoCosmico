@@ -9,17 +9,18 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     public float speed = 4.0f;
     public float gravity = -9.81f;
 
-    public float zeroGravityForce = 0.2f; // Força de flutuação na gravidade zero
+    public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
     public float downwardSpeed = 5f;
 
-    public Image downwardhBar; // Referência à barra de downward
-    public float downward; // Valor atual de downward
-    public float maxDownward; // Valor máximo de downward
-
-    //public GameObject downwardBar; // GameObject da barra de downward
-    public float attackCost; // Custo de ataque
-    public float chargeRate; // Taxa de recarga
-
+    
+    public Image downwardhBar;
+    public float downward;
+    public float maxDownward;
+    
+    public GameObject downwardBar;
+    public float attackCost;
+    public float chargeRate;
+   
     private Coroutine recharge;
 
     private Vector2 movementInput;
@@ -29,11 +30,11 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     public bool isInZeroGravityZone = false; // Para controlar a zona de gravidade zero
     private Animator anim;
 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        downward = maxDownward; // Inicializa downward com o valor máximo
     }
 
     void Update()
@@ -44,42 +45,32 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         isGrounded = controller.isGrounded;
 
         // Se o jogador estiver na zona de gravidade zero
-        if (isInZeroGravityZone)
+        if (isInZeroGravityZone )
         {
             speed = 1f;
             // Aplica a força de flutuação
             velocity.y = zeroGravityForce;
-
-            if (Keyboard.current.qKey.isPressed && downward > 0)
+            if (Keyboard.current.qKey.isPressed && downwardhBar.fillAmount > 0)
             {
                 // Move o jogador para baixo
                 velocity.y -= downwardSpeed * Time.deltaTime;
-
-                // Reduz downward apenas se for maior que zero
+                downwardBar.SetActive(true);
                 downward -= attackCost;
-                if (downward < 0)
-                {
-                    downward = 0; // Garante que downward não fique negativo
-                }
                 if (downward == 0)
                 {
-                    downward = maxDownward;
+                  
+                    downward = 0;
+                  
                 }
-
-                downwardhBar.fillAmount = downward / maxDownward; // Atualiza a barra
-               // downwardBar.SetActive(true); // Ativa a barra
+                downwardhBar.fillAmount = downward / maxDownward;
             }
-
-            // Reinicia a recarga se downward não estiver no máximo
-            if (downward < maxDownward)
+            if (recharge != null)
             {
-               
-                if (recharge != null)
-                {
-                    StopCoroutine(recharge);
-                }
-                recharge = StartCoroutine(RechargeHealth());
+                StopCoroutine(recharge);
             }
+            recharge = StartCoroutine(RechargeHealth());
+
+            
         }
         else
         {
@@ -105,10 +96,10 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica se o objeto que entrou no trigger é a sala
+        // Verifica se o objeto que entrou no trigger é o jogador
         if (other.CompareTag("Sala"))
         {
-           // downwardBar.SetActive(true);
+            downwardBar.SetActive(true);
             isInZeroGravityZone = true; // Ativa a gravidade zero
             Debug.Log("Entrou na zona de gravidade zero");
         }
@@ -120,13 +111,12 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
 
         while (downward < maxDownward)
         {
-            Debug.Log("recarga");
-            downward += chargeRate / 10f; // Aumenta downward
+            downward += chargeRate / 10f;
             if (downward > maxDownward)
             {
-                downward = maxDownward; // Garante que downward não exceda o máximo
+                downward = maxDownward;
             }
-            downwardhBar.fillAmount = downward / maxDownward;
+        downwardhBar.fillAmount = downward / maxDownward;
             yield return new WaitForSeconds(.1f);
 
         }

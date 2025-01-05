@@ -48,6 +48,7 @@ public class TaskControllerEnergy : MonoBehaviour
     void Die()
     {
         currentAttempts = maxAttempts; // Reinicia as tentativas
+        Debug.Log("Você morreu!"); 
         transform.position = respawn; // Respawn no ponto definido
     }
 }
