@@ -178,6 +178,7 @@ MonoBehaviour:
   doorTwo: {fileID: 1647134378}
   downwardBar: {fileID: 591176441}
   zeroGravityFloor: {fileID: 987017597}
+  playerMain: {fileID: 0}
   finishedTask: {fileID: 0}
 --- !u!65 &7476876
 BoxCollider:
@@ -4618,8 +4619,12 @@ MonoBehaviour:
   gravity: -9.81
   zeroGravityForce: 0.1
   downwardSpeed: 10
-  barraDeProgresso: {fileID: 978661617}
+  downwardhBar: {fileID: 0}
+  downward: 0
+  maxDownward: 0
   downwardBar: {fileID: 591176441}
+  attackCost: 0
+  chargeRate: 0
   isInZeroGravityZone: 0
 --- !u!114 &691620762
 MonoBehaviour:
@@ -7094,6 +7099,7 @@ MonoBehaviour:
   doorTwo: {fileID: 1647134378}
   downwardBar: {fileID: 591176441}
   zeroGravityFloor: {fileID: 987017597}
+  playerMain: {fileID: 0}
   finishedTask: {fileID: 1916323240}
 --- !u!1 &1167563862
 GameObject:
