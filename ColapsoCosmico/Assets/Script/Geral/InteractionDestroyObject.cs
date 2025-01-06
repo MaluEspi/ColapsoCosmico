@@ -14,6 +14,11 @@ public class InteractionDestroyObject : MonoBehaviour
 
     void CheckInteraction()
     {
+        if (Camera.main == null)
+        {
+            Debug.Log("A câmera principal não está disponível.");
+            return; // Sai do método se a câmera não estiver disponível
+        }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {

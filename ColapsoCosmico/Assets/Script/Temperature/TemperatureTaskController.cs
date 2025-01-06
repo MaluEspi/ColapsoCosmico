@@ -11,7 +11,6 @@ public class TemperatureTaskController : MonoBehaviour
 
     public Text itemText;
     public Text itemCount;
-    public Text noItemText;
 
     public GameObject valveCount;
     public GameObject cabinetTemp;
@@ -31,12 +30,12 @@ public class TemperatureTaskController : MonoBehaviour
     private Coroutine recharge;
 
     public GameObject finishedTask;
+    public GameObject temps;
     private bool objetoColetado;
     // Start is called before the first frame update
     void Start()
     {
         itemText.text = null;
-        noItemText.text = "";
         slotAmount = new int[slots.Length];
     }
 
@@ -50,7 +49,7 @@ public class TemperatureTaskController : MonoBehaviour
             if (hit.collider.CompareTag("Object"))
             {
                 itemText.text = "Pressione (E) para coletar o objeto " + hit.transform.GetComponent<ObjectType>().objectType.name;
-                noItemText.text = "";
+              
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     CollectItem(hit);
@@ -66,7 +65,7 @@ public class TemperatureTaskController : MonoBehaviour
                 {
                     itemText.text = "Nenhum objeto foi coletado.";
                 }
-                noItemText.text = "";
+               
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     RemoveItemFromInventory(hit);
@@ -125,7 +124,9 @@ public class TemperatureTaskController : MonoBehaviour
                     tempBar.SetActive(false); // desativa a barra de vida
 
                     finishedTask.SetActive(true);
-                    
+                    temps.SetActive(false);
+                    itemText.text = "Todos os objetos foram posicionados";
+
                 }
                 break; // Sai do loop após remover um item
             }

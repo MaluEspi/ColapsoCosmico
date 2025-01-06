@@ -17,6 +17,11 @@ public class ToggleCanvasOnKey : MonoBehaviour
 
     void Update()
     {
+        if (Camera.main == null)
+        {
+            Debug.Log("A câmera principal não está disponível.");
+            return; // Sai do método se a câmera não estiver disponível
+        }
         if (Input.GetKeyDown(KeyCode.E) && IsMouseOver())
         {
             ToggleCanvas();
@@ -33,6 +38,7 @@ public class ToggleCanvasOnKey : MonoBehaviour
 
     private bool IsMouseOver()
     {
+      
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
