@@ -169,6 +169,14 @@ public class TemperatureTaskController : MonoBehaviour
         recharge = StartCoroutine(RechargeHealth());
 
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Temp"))
+        {
+            tempBar.SetActive(false);
+        }
+
+    }
 
     private IEnumerator RechargeHealth()
     {
