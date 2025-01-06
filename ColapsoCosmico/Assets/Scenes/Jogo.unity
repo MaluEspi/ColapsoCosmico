@@ -7296,7 +7296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de9549cca0fdba458dd63d8747885f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 50
+  sensitivity: 25
   cameraMove: {fileID: 753379279}
 --- !u!114 &691620759
 MonoBehaviour:
