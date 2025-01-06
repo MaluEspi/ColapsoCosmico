@@ -7123,6 +7123,7 @@ MonoBehaviour:
   lightsRed: {fileID: 352660789}
   respawn: {x: 28, y: 0, z: 24}
   finishedTask: {fileID: 1114004843}
+  cancelCamera: {fileID: 3800962633643111430}
 --- !u!114 &691620764
 MonoBehaviour:
   m_ObjectHideFlags: 0

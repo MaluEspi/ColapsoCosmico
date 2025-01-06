@@ -9,7 +9,6 @@ public class Wire : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
         playerController = FindObjectOfType<TaskControllerEnergy>(); // Encontra o PlayerController na cena
  
     }
