@@ -11,6 +11,7 @@ public class TemperatureTaskController : MonoBehaviour
 
     public Text itemText;
     public Text itemCount;
+    public Text noItemText;
 
     public GameObject valveCount;
     public GameObject cabinetTemp;
@@ -30,10 +31,12 @@ public class TemperatureTaskController : MonoBehaviour
     private Coroutine recharge;
 
     public GameObject finishedTask;
+    private bool objetoColetado;
     // Start is called before the first frame update
     void Start()
     {
         itemText.text = null;
+        noItemText.text = "";
         slotAmount = new int[slots.Length];
     }
 
@@ -46,7 +49,8 @@ public class TemperatureTaskController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Object"))
             {
-                itemText.text = "Press (E) to collect the object " + hit.transform.GetComponent<ObjectType>().objectType.name;
+                itemText.text = "Pressione (E) para coletar o objeto " + hit.transform.GetComponent<ObjectType>().objectType.name;
+                noItemText.text = "";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     CollectItem(hit);
@@ -54,12 +58,20 @@ public class TemperatureTaskController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Camaras"))
             {
-                itemText.text = "Press (E) to put the objects " ;
+                if (objetoColetado == true)
+                {
+                    itemText.text = "Pressione (E) para colocar os objetos"; 
+                }
+                else if ( objetoColetado == false)
+                {
+                    itemText.text = "Nenhum objeto foi coletado.";
+                }
+                noItemText.text = "";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                  
                     RemoveItemFromInventory(hit);
                 }
+               
             }
             else
             {
@@ -73,6 +85,7 @@ public class TemperatureTaskController : MonoBehaviour
 
     void CollectItem(RaycastHit hit)
     {
+        itemCount.text = "";
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] == null || slots[i].name == hit.transform.GetComponent<ObjectType>().objectType.name)
@@ -83,6 +96,7 @@ public class TemperatureTaskController : MonoBehaviour
                     slotsImage[i].sprite = slots[i].itemSprite;
                 }
                 slotAmount[i]++;
+                objetoColetado = true;
                 Destroy(hit.transform.gameObject);
                 break;
             }
@@ -93,17 +107,17 @@ public class TemperatureTaskController : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i] != null  && slotAmount[i] > 0)
+            if (slots[i] != null && slotAmount[i] > 0)
             {
                 slotAmount[i]--;
                 removedItensCount++;
                 if (slotAmount[i] == 0)
-                {                   
+                {
                     // Se a quantidade for zero, limpa o slot
-                    slots[i] = null;                 
+                    slots[i] = null;
                 }
 
-                if(removedItensCount >= 4)
+                if (removedItensCount >= 4)
                 {
                     valveCount.SetActive(false); // desativa a imagem
                     lightTemp.SetActive(false); // desliga as luzes das salas
@@ -111,12 +125,13 @@ public class TemperatureTaskController : MonoBehaviour
                     tempBar.SetActive(false); // desativa a barra de vida
 
                     finishedTask.SetActive(true);
+                    
                 }
                 break; // Sai do loop após remover um item
             }
         }
-    }
 
+    }
     void UpdateItemCountText()
     {
         itemCount.text = ""; // Limpa o texto anterior
@@ -127,6 +142,7 @@ public class TemperatureTaskController : MonoBehaviour
                 valveCount.SetActive(true);
                 itemCount.text += slots[i].name + ": " + slotAmount[i] + "/2 "; // Adiciona a contagem de cada item
             }
+
         }
     }
     private void OnTriggerStay(Collider other)
@@ -151,6 +167,14 @@ public class TemperatureTaskController : MonoBehaviour
             StopCoroutine(recharge);
         }
         recharge = StartCoroutine(RechargeHealth());
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Temp"))
+        {
+            tempBar.SetActive(false);
+        }
 
     }
 

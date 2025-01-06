@@ -13,6 +13,7 @@ public class TaskControllerEnergy : MonoBehaviour
     public Vector3 respawn; // Ponto de respawn
 
     public GameObject finishedTask;
+    public GameObject cancelCamera;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class TaskControllerEnergy : MonoBehaviour
             lightsRed.SetActive(false); // Desativa as luzes vermelhas
             wires[wireIndex].SetActive(false); // Desativa o fio cortado
             finishedTask.SetActive(false);
+            cancelCamera.GetComponent<CancelCamera>().EnableMovement();
         }
         else
         {
@@ -48,7 +50,7 @@ public class TaskControllerEnergy : MonoBehaviour
     void Die()
     {
         currentAttempts = maxAttempts; // Reinicia as tentativas
-        Debug.Log("Você morreu!"); 
+        
         transform.position = respawn; // Respawn no ponto definido
     }
 }

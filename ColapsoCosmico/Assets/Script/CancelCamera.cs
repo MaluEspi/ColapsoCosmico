@@ -13,14 +13,13 @@ public class CancelCamera : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) // 0 é o botão esquerdo do mouse
-        {
-            Cursor.lockState = CursorLockMode.None;
+    {  
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
             {
                
                 if (hit.transform == transform) // Verifica se o objeto clicado é este
@@ -34,10 +33,10 @@ public class CancelCamera : MonoBehaviour
                 }
             }
         }
-       
     }
     private void DisableMovement()
     {
+         Cursor.lockState = CursorLockMode.None;
         playerMain.GetComponent<Animator>().enabled = false;
         playerMain.GetComponent<CameraMove>().enabled = false;
         playerMain.GetComponent<PlayerMovementWZeroGravity>().enabled = false;
@@ -45,8 +44,9 @@ public class CancelCamera : MonoBehaviour
         isMovementDisabled = true; // Atualiza o estado para desabilitado
     }
 
-    private void EnableMovement()
+    public void EnableMovement()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         playerMain.GetComponent<Animator>().enabled = true;
         playerMain.GetComponent<CameraMove>().enabled = true;
         playerMain.GetComponent<PlayerMovementWZeroGravity>().enabled = true;
