@@ -26,7 +26,6 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
             mouseX = lookInput.x * sensitivity * Time.deltaTime;
             mouseY = lookInput.y * sensitivity * Time.deltaTime;
 
