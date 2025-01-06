@@ -123,12 +123,12 @@ public class TemperatureTaskController : MonoBehaviour
                     cabinetTemp.SetActive(true); // muda o sprite da camara
                     tempBar.SetActive(false); // desativa a barra de vida
 
-                    finishedTask.SetActive(true);
+                    finishedTask.SetActive(false);
                     temps.SetActive(false);
                     itemText.text = "Todos os objetos foram posicionados";
 
                 }
-                break; // Sai do loop após remover um item
+                break; // Sai do loop apï¿½s remover um item
             }
         }
 
@@ -197,7 +197,7 @@ public class TemperatureTaskController : MonoBehaviour
     }
     private void Respawn()
     {
-        transform.position = respawn; // Reinicia a posição do jogador
+        transform.position = respawn; // Reinicia a posiï¿½ï¿½o do jogador
         health = maxHealth; // Restaura a vida
 
     }

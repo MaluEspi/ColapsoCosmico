@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0012142747, g: 0.0015921557, b: 0.00020405522, a: 1}
+  m_IndirectSpecularColor: {r: 0.0012148804, g: 0.0015931368, b: 0.00020431254, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7330,7 +7330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oxygenSlider: {fileID: 1787721678}
-  oxygenDuration: 120
+  oxygenDuration: 240
   systemFixedObject: {fileID: 2119993523}
   interactionDistance: 2.5
 --- !u!114 &691620762
@@ -7373,11 +7373,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   gravity: -9.81
-  zeroGravityForce: 0.2
-  downwardSpeed: 10
+  zeroGravityForce: 0.1
+  downwardSpeed: 100
   barraDeProgresso: {fileID: 1499462851}
-  downwardBar: {fileID: 330988118}
   isInZeroGravityZone: 0
+  barraProgresso: {fileID: 330988118}
 --- !u!114 &691620765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17842,7 +17842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 072db40e19a592540bf5bf652d7530a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.957
+      value: 12.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 072db40e19a592540bf5bf652d7530a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19413,7 +19413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1713952324
 Transform:
   m_ObjectHideFlags: 0
@@ -38657,7 +38657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7157358771259065357}
   m_LocalRotation: {x: 0, y: -0.52769727, z: 0, w: 0.8494325}
-  m_LocalPosition: {x: 40.08326, y: 0.120000005, z: 22.140081}
+  m_LocalPosition: {x: 40.08326, y: 0.123, z: 22.140081}
   m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children: []

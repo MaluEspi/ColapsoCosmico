@@ -11,6 +11,11 @@ public class OxygenSystemActivator : MonoBehaviour
 
     void Update()
     {
+         if (Camera.main == null)
+        {
+            return; // Sai do metodo se a camera nao estiver disponivel
+        }
+
         if (!allItemsDestroyed)
         {
             CheckRequiredItems(); 

@@ -8,10 +8,9 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     public float speed = 4.0f;
     public float gravity = -9.81f;
 
-    public float zeroGravityForce = 0.2f;// Força de flutuação na gravidade zero
+    public float zeroGravityForce = 0.2f;// Forï¿½a de flutuaï¿½ï¿½o na gravidade zero
     public float downwardSpeed = 5f;
-    public ProgressBar barraDeProgresso; // Referência à barra de progresso
-    public GameObject downwardBar;
+    public ProgressBar barraDeProgresso; // Referï¿½ncia ï¿½ barra de progresso
 
     private Vector2 movementInput;
     private CharacterController controller;
@@ -19,6 +18,8 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     private bool isGrounded;
     public bool isInZeroGravityZone = false; // Para controlar a zona de gravidade zero
     private Animator anim;
+
+     public GameObject barraProgresso;
 
 
     void Start()
@@ -38,9 +39,9 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         if (isInZeroGravityZone )
         {
             speed = 1f;
-            // Aplica a força de flutuação
+            // Aplica a forï¿½a de flutuaï¿½ï¿½o
             velocity.y = zeroGravityForce;
-            if (Keyboard.current.qKey.isPressed && barraDeProgresso.barraProgresso.rectTransform.sizeDelta.x > 0)
+            if (Keyboard.current.qKey.isPressed  && barraDeProgresso.barraProgresso.rectTransform.sizeDelta.x > 0)
             {
                 // Move o jogador para baixo
                 velocity.y -= downwardSpeed * Time.deltaTime;
@@ -50,7 +51,7 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
         }
         else
         {
-            // Lógica normal de gravidade
+            // Lï¿½gica normal de gravidade
             if (isGrounded && velocity.y < 0)
             {
                 speed = 4f;
@@ -72,10 +73,10 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica se o objeto que entrou no trigger é o jogador
+        // Verifica se o objeto que entrou no trigger ï¿½ o jogador
         if (other.CompareTag("Sala"))
         {
-            downwardBar.SetActive(true);
+            barraProgresso.SetActive(true);
             isInZeroGravityZone = true; // Ativa a gravidade zero
             Debug.Log("Entrou na zona de gravidade zero");
         }
@@ -84,7 +85,7 @@ public class PlayerMovementWZeroGravity : MonoBehaviour
     private IEnumerator ReiniciarBarra()
     {
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(5f);
         barraDeProgresso.ReiniciarBarra();
     }
 

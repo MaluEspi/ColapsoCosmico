@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CancelCamera : MonoBehaviour
 {
-    public GameObject playerMain; // Referência ao objeto do jogador
+    public GameObject playerMain; // Referï¿½ncia ao objeto do jogador
     private bool isMovementDisabled = false;
 
     private void Start()
@@ -14,11 +14,10 @@ public class CancelCamera : MonoBehaviour
     }
     private void Update()
     {
-        // Verifica se a câmera principal está disponível
+        // Verifica se a cï¿½mera principal estï¿½ disponï¿½vel
         if (Camera.main == null)
         {
-           Debug.Log("A câmera principal não está disponível.");
-            return; // Sai do método se a câmera não estiver disponível
+            return; // Sai do mï¿½todo se a cï¿½mera nï¿½o estiver disponï¿½vel
         }
 
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -28,7 +27,7 @@ public class CancelCamera : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (hit.transform == transform) // Verifica se o objeto clicado é este
+                if (hit.transform == transform) // Verifica se o objeto clicado ï¿½ este
                 {
                     DisableMovement();
                 }
@@ -44,7 +43,7 @@ public class CancelCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
 
-        // Verifica se playerMain não é nulo antes de acessar seus componentes
+        // Verifica se playerMain nï¿½o ï¿½ nulo antes de acessar seus componentes
         if (playerMain != null)
         {
             Animator animator = playerMain.GetComponent<Animator>();
@@ -57,7 +56,7 @@ public class CancelCamera : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("playerMain não está atribuído.");
+            Debug.LogWarning("playerMain nï¿½o estï¿½ atribuï¿½do.");
         }
 
         isMovementDisabled = true; // Atualiza o estado para desabilitado
@@ -67,7 +66,7 @@ public class CancelCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        // Verifica se playerMain não é nulo antes de acessar seus componentes
+        // Verifica se playerMain nï¿½o ï¿½ nulo antes de acessar seus componentes
         if (playerMain != null)
         {
             Animator animator = playerMain.GetComponent<Animator>();
@@ -80,7 +79,7 @@ public class CancelCamera : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("playerMain não está atribuído.");
+            Debug.LogWarning("playerMain nï¿½o estï¿½ atribuï¿½do.");
         }
 
         isMovementDisabled = false; // Atualiza o estado para habilitado
